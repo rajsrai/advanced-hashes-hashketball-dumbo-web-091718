@@ -1,4 +1,4 @@
-#require 'pry'
+require 'pry'
 
  def game_hash
    {
@@ -112,6 +112,7 @@
      team_data[:players].each do |player, attribute|
        if player == player_name
            return attribute[:points]
+           binding.pry
        end
     end
   end
@@ -145,15 +146,14 @@ end
  
  def player_numbers(team_names)
   player_num = []
-  game_hash.each do |location, team_data|
-    if team_data[:team_name] == team_names
-      team_data[:players].each do |name, data|
-        player_num << team_data[:players][name][:number]
-      end
-    end
-  end
-  player_num
-  
+  var = game_hash.select { |location, team_data| team_data[:team_name] == team_names }
+  # game_hash.each do |location, team_data|
+  #   if team_data[:team_name] == team_names
+  #     team_data[:players].each do |name, data|
+  #       player_num << team_data[:players][name][:number]
+  #     end
+  #   end
+  # end
 end
 
  def player_stats(player_names)
@@ -169,7 +169,7 @@ end
  def big_shoe_rebounds
   shoe_size = []
   game_hash.each do |location, team_data|
-    team_data[:players].each do |name, data|
+    team_data:players].each do |name, data|
       shoe_size << data[:shoe]
       if team_data[:players][name][:shoe] == shoe_size.max
         return team_data[:players][name][:rebounds]
